@@ -118,14 +118,14 @@ HAVING COUNT(aw.ArtworkID) > 2;
 SELECT ArtworkID, Title
 FROM Artworks
 WHERE ArtworkID IN (SELECT ea.ArtworkID 
-					FROM Exhibitions e, ExhibitionArtworks ea
-					WHERE e.ExhibitionID = ea.ExhibitionID
-					AND e.Title = 'Modern Art Masterpieces'
-					INTERSECT
-					SELECT ea.ArtworkID 
-					FROM Exhibitions e, ExhibitionArtworks ea
-					WHERE e.ExhibitionID = ea.ExhibitionID
-					AND e.Title = 'Renaissance Art');
+		    FROM Exhibitions e, ExhibitionArtworks ea
+		    WHERE e.ExhibitionID = ea.ExhibitionID
+		    AND e.Title = 'Modern Art Masterpieces'
+		    INTERSECT
+		    SELECT ea.ArtworkID 
+		    FROM Exhibitions e, ExhibitionArtworks ea
+		    WHERE e.ExhibitionID = ea.ExhibitionID
+		    AND e.Title = 'Renaissance Art');
 
 --7. Find the total number of artworks in each category
 SELECT c.Name, ISNULL(COUNT(a.ArtworkID), 0) TotalArtworksInEachCategory
@@ -150,22 +150,22 @@ AND a.Nationality = 'Spanish';
 SELECT ExhibitionID, Title
 FROM Exhibitions
 WHERE ExhibitionID IN (SELECT ea.ExhibitionID
-					   FROM ExhibitionArtworks ea, Artists a, Artworks aw
-					   WHERE a.ArtistID = aw.ArtistID
-					   AND aw.ArtworkID = ea.ArtworkID
-					   AND a.Name = 'Vincent van Gogh'
-					   INTERSECT
-					   SELECT ea.ExhibitionID
-					   FROM ExhibitionArtworks ea, Artists a, Artworks aw
-					   WHERE a.ArtistID = aw.ArtistID
-					   AND aw.ArtworkID = ea.ArtworkID
-					   AND a.Name = 'Leonardo da Vinci');
+		       FROM ExhibitionArtworks ea, Artists a, Artworks aw
+		       WHERE a.ArtistID = aw.ArtistID
+		       AND aw.ArtworkID = ea.ArtworkID
+		       AND a.Name = 'Vincent van Gogh'
+		       INTERSECT
+		       SELECT ea.ExhibitionID
+		       FROM ExhibitionArtworks ea, Artists a, Artworks aw
+		       WHERE a.ArtistID = aw.ArtistID
+		       AND aw.ArtworkID = ea.ArtworkID
+		       AND a.Name = 'Leonardo da Vinci');
 
 --11. Find all the artworks that have not been included in any exhibition.
 SELECT ArtworkID, Title
 FROM Artworks
 WHERE ArtworkID NOT IN (SELECT DISTINCT ArtworkID
-					FROM ExhibitionArtworks);
+			FROM ExhibitionArtworks);
 
 --12. List artists who have created artworks in all available categories.
 
@@ -190,10 +190,10 @@ HAVING COUNT(aw.ArtworkID) > 2;
 SELECT aw.ArtworkID, aw.Title
 FROM Artworks aw
 WHERE aw.ArtworkID IN (SELECT ArtworkID
-					   FROM ExhibitionArtworks
-					   WHERE ExhibitionID = (SELECT ExhibitionID
-											 FROM Exhibitions
-											 WHERE Title = 'Modern Art Masterpieces'));
+		       FROM ExhibitionArtworks
+		       WHERE ExhibitionID = (SELECT ExhibitionID
+					     FROM Exhibitions
+					     WHERE Title = 'Modern Art Masterpieces'));
 
 --17. Find the categories where the average year of artworks is greater than the average year of all artworks.
 
@@ -202,7 +202,7 @@ WHERE aw.ArtworkID IN (SELECT ArtworkID
 SELECT ArtworkID, Title
 FROM Artworks
 WHERE ArtworkID NOT IN (SELECT DISTINCT ArtworkID
-						FROM ExhibitionArtworks);
+			FROM ExhibitionArtworks);
 
 --19. Show artists who have artworks in the same category as "Mona Lisa."
 
